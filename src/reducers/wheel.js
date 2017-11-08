@@ -1,11 +1,57 @@
+const word = "rythmstick"
 
+let guesses = []
+function wrongGuessCount(word, guesses) {
+
+  var wrongs = guesses.filter(guess => word.indexOf(guess) === -1);
+  return wrongs.length;
+
+}
+
+function wheel() {
+  var guesValues= [10, 20, 30, 40, 50]
+  return guesValues[Math.floor(Math.random() * guesValues.length)];
+}
+
+function showGuess(word, guesses) {
+  var splitWord = word.split('');
+  var result = [];
+
+  result = splitWord.map(letter => {
+    if (guesses.indexOf(letter) === -1) {
+      return '_';
+    } else return letter;
+  });
+
+  let joined = result.join(' ');
+  return joined;
+}
+
+function isWinner(word, guesses) {
+  var splitWord = word.split('');
+
+  let notGuessed = splitWord.filter(letter => guesses.indexOf(letter) === -1);
+  if (notGuessed.length > 0) return false
+  else return true
+}
+
+// function next(word, guesses) {
+//   if (isWinner(word, guesses)) {
+//     return ('You have won!');
+//   }
+//   if (wrongGuessCount(word, guesses) === 6) {
+//     return ('You have lost!');
+//   } else {
+//     return ('Choose a letter please...')
+//   }
+// }
 
 const initialState = {
-  letterBoard: "-letterboardtest--",
-  word: "quinoa",
-  guesses: ['a'],
+  letterBoard: showGuess(word, guesses),
+  word: word,
+  guesses: guesses,
   completed: false,
-  wheelValue: 10,
+  wheelValue: wheel(),
 
 }
 
