@@ -20,6 +20,7 @@ class Game extends PureComponent {
       _id: PropTypes.string.isRequired,
       userId: PropTypes.string.isRequired,
       players: PropTypes.arrayOf(playerShape),
+      turn: PropTypes.number.isRequired,
       draw: PropTypes.bool,
       updatedAt: PropTypes.string.isRequired,
       createdAt: PropTypes.string.isRequired,
@@ -30,7 +31,6 @@ class Game extends PureComponent {
       word: PropTypes.string.isRequired,
       guesses: PropTypes.array,
       completed: PropTypes.bool,
-      turn: PropTypes.number.isRequired,
       wheelValue: PropTypes.number.isRequired,
 
     }),
@@ -69,8 +69,12 @@ class Game extends PureComponent {
     return (
       <div className="Game">
         <h1>{title}</h1>
+        <h1> Word {this.props.wheel.word}</h1>
         <h1> Letterboard {this.props.wheel.letterBoard}</h1>
+        <h1> Guesses {this.props.wheel.guesses}</h1>
+        <h1> completed { this.props.wheel.completed.toString() }</h1>
         <h1> Wheel value {this.props.wheel.wheelValue}</h1>
+
 
 
         <h2>Debug Props</h2>
@@ -97,21 +101,9 @@ const mapStateToProps = ({ currentUser, games, wheel }, { match }) => {
   }
 }
 
-//  functie omgeschreven naar NIET shorthand
-//mapStateToProps  = function(state){
-// currentUser: state.currentUser.
-// games: state.games.game
-//  wheel: state.wheel.wheel.
-// }
 
-// const mapStateToProps =  function(state){
-//   return {
-//         showguess: state.guess.showguess,
-//         wrongguesscount: state.guess.wrongguesscount,
-//         iswinner: state.guess.iswinner,
-//         guesses: state.guess.guesses
-//     }
-// }
+
+
 
 export default connect(mapStateToProps, {
   subscribeToWebsocket,
