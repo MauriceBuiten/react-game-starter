@@ -1,11 +1,9 @@
 
 
 const initialState = {
-  draw: false,
-  started: false,
   letterBoard: "-letterboardtest--",
   word: "quinoa",
-  guesses: [],
+  guesses: ['a'],
   completed: false,
   wheelValue: 10,
 
