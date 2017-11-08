@@ -1,3 +1,5 @@
+import {ADD_GUESS} from '../actions/addguess'
+
 const word = "rythmstick"
 
 let guesses = []
@@ -57,5 +59,32 @@ const initialState = {
 
 export default (state = initialState, { type, payload } = {}) => {
 
-      return state
+  switch(type){
+    case ADD_GUESS:
+            return{
+
+
+            }
+
+    default:
+    return state
+  }
 }
+
+
+// export default (state = initialState, { type, payload } = {}) => {
+//   switch(type) {
+//     case ADD_GUESS:
+//         state.guesses.push(payload)
+//         return {
+//           word: state.word,
+//           guesses: state.guesses,
+//           wrongguesscount: wrongGuessCount(state.word, state.guesses),
+//           iswinner: isWinner(state.word, state.guesses),
+//           showguess: showGuessTekst(state.word, state.guesses),
+//         }
+//     default:
+//       return state
+//
+//     }
+//   }
