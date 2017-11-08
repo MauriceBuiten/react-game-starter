@@ -28,7 +28,7 @@ class Game extends PureComponent {
       word: PropTypes.string.isRequired,
       guesses: PropTypes.array,
       completed: PropTypes.bool,
-      currentTurn: PropTypes.number.isRequired,
+      turn: PropTypes.number.isRequired,
       wheelValue: PropTypes.number.isRequired,
     }),
     currentPlayer: playerShape,
