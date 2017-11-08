@@ -64,10 +64,8 @@ class Game extends PureComponent {
 
     return (
       <div className="Game">
-        <h1>Game!</h1>
-        <p>{title}</p>
+        <h1>{title}</h1>
 
-        <h1>YOUR GAME HERE! :)</h1>
 
         <h2>Debug Props</h2>
         <pre>{JSON.stringify(this.props, true, 2)}</pre>
@@ -78,16 +76,18 @@ class Game extends PureComponent {
   }
 }
 
-const mapStateToProps = ({ currentUser, games }, { match }) => {
+const mapStateToProps = ({ currentUser, games, wheel }, { match }) => {
   const game = games.filter((g) => (g._id === match.params.gameId))[0]
   const currentPlayer = game && game.players.filter((p) => (p.userId === currentUser._id))[0]
   const hasTurn = !!currentPlayer && game.players[game.turn].userId === currentUser._id
+  const letterBoard = this.props.letterBoard
   return {
     currentPlayer,
     game,
     isPlayer: !!currentPlayer,
     hasTurn,
-    isJoinable: game && !currentPlayer && game.players.length < 2
+    isJoinable: game && !currentPlayer && game.players.length < 2,
+    letterBoard
   }
 }
 
