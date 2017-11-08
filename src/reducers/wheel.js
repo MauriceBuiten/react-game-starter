@@ -1,10 +1,11 @@
 import {ADD_GUESS} from '../actions/addguess'
 
-const word = "rythmstick"
+function getWord(){
+  var words = ["refrigerator", "telephone", "pillowcase", "doormat", "houseplant", "gaming", "curtains"]
+  return words[Math.floor(Math.random() * words.length)];
+}
 
-let guesses = []
 function wrongGuessCount(word, guesses) {
-
   var wrongs = guesses.filter(guess => word.indexOf(guess) === -1);
   return wrongs.length;
 
@@ -47,6 +48,9 @@ function isWinner(word, guesses) {
 //     return ('Choose a letter please...')
 //   }
 // }
+
+var word = getWord();
+let guesses = []
 
 const initialState = {
   letterBoard: showGuess(word, guesses),
