@@ -11,20 +11,20 @@ import { turnWheel, showLetterBoard, isWinner, next } from '../functions/wheel'
 
 export default (state = [], { type, payload } = {}) => {
   switch (type) {
-    case PRESS_KEY:
-
-    return state.map((game) => {
-      if (game._id === payload._id) {
-        return { ...payload }
-      }
-
-      return {
-        ...game,
-        guesses:[...game.guesses, payload],
-        letterBoard: showLetterBoard(game.word, [...game.guesses, payload]),
-      }
-
-    })
+    // case PRESS_KEY:
+    //
+    // return state.map((game) => {
+    //   if (game._id === payload._id) {
+    //     return { ...payload }
+    //   }
+    //
+    //   return {
+    //     ...game,
+    //     guesses:[...game.guesses, payload],
+    //     letterBoard: showLetterBoard(game.word, [...game.guesses, payload]),
+    //   }
+    //
+    // })
 
     case FETCHED_GAMES:
       return [...payload]
@@ -48,7 +48,9 @@ export default (state = [], { type, payload } = {}) => {
     case GAME_UPDATED:
       return state.map((game) => {
         if (game._id === payload._id) {
-          return { ...payload }
+          // return { ...payload }
+           console.log(payload)
+          return {...payload, letterBoard: showLetterBoard(payload.word, payload.guesses) }
         }
         return game
 

@@ -57,7 +57,6 @@ class Game extends PureComponent {
   handleKeyPress(event) {
     this.props.pressKey(event.key)
     this.update(event.key)
-
   }
 
   componentWillReceiveProps(nextProps) {
@@ -72,7 +71,6 @@ class Game extends PureComponent {
     const { game, fetchOneGame, subscribeToWebsocket } = this.props
     const { gameId } = this.props.match.params
 
-    console.log("test", game)
 
     if (!game) { fetchOneGame(gameId) }
     subscribeToWebsocket()
@@ -116,8 +114,8 @@ class Game extends PureComponent {
 
         </GridTile>
         <GridTile cols={1} rows={1}>
-            <h2> {game.players[0].name}</h2>
-            <h3> {game.players[0].points}</h3>
+            <h2> the enemy </h2>
+            <h3> placeholderforenemypoints</h3>
         </GridTile>
 
         </GridList>
