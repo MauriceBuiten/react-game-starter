@@ -87,6 +87,16 @@ class Game extends PureComponent {
       .filter(n => !!n)
       .join(' vs ')
 
+    function player() {
+      if (game.players.length === 2) {
+        return (
+          <div>
+          <h2> {game.players[1].name}</h2>
+          <h3> {game.players[1].points}</h3>
+          </div>
+        )
+      }
+    }
     return (
       <div>
       <GridList>
@@ -104,12 +114,12 @@ class Game extends PureComponent {
         <GridTile cols={1} rows={1}>
             <h2> {game.players[0].name}</h2>
             <h3> {game.players[0].points}</h3>
-
         </GridTile>
         <GridTile cols={1} rows={1}>
-            <h2> {game.players[0].name}</h2>
-            <h3> {game.players[0].points}</h3>
+            { player() }
         </GridTile>
+
+
 
         </GridList>
 
