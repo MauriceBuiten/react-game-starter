@@ -7,9 +7,7 @@ import {
   GAME_REMOVED,
   GAME_PLAYERS_UPDATED,
 } from '../actions/games/subscribe'
-import { getWord, wheel, wrongGuessCount, showGuess, isWinner, next } from '../functions/wheel'
-
-const initialWord = getWord()
+import { turnWheel, showLetterBoard, isWinner, next } from '../functions/wheel'
 
 export default (state = [], { type, payload } = {}) => {
   switch (type) {
@@ -21,6 +19,7 @@ export default (state = [], { type, payload } = {}) => {
         return { ...payload }
       }
       game.guesses.push(payload)
+      game.letterBoard = showLetterBoard(game.word, game.guesses)
       return game
     })
 
@@ -52,7 +51,6 @@ export default (state = [], { type, payload } = {}) => {
       })
 
     case GAME_PLAYERS_UPDATED:
-      console.log(state, payload)
       return state.map((game) => {
         if (game._id === payload.game._id) {
           return { ...payload.game, players: payload.players }
