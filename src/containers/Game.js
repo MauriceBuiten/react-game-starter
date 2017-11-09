@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { fetchOneGame, fetchPlayers } from '../actions/games/fetch'
+import {updateGame} from '../actions/game/update'
 import { connect as subscribeToWebsocket } from '../actions/websocket'
 import JoinGameDialog from '../components/games/JoinGameDialog'
 import './../App.css'
@@ -42,13 +43,20 @@ class Game extends PureComponent {
     hasTurn: PropTypes.bool
   }
 
+
+ update(letter) {
+   const {game} = this.props
+   this.props.updateGame(game, letter)
+ }
+
   constructor(props) {
     super(props);
     this.handleKeyPress = this.handleKeyPress.bind(this);
   }
 
   handleKeyPress(event) {
-    this.props.pressKey(event.key);
+    this.props.pressKey(event.key)
+    this.update(event.key);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -147,5 +155,6 @@ export default connect(mapStateToProps, {
   subscribeToWebsocket,
   fetchOneGame,
   fetchPlayers,
-  pressKey
+  pressKey,
+  updateGame,
 })(Game)
