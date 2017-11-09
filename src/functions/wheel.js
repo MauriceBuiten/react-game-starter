@@ -1,20 +1,10 @@
-export function getWord(){
-  var words = ["refrigerator", "telephone", "pillowcase", "doormat", "houseplant", "gaming", "curtains"]
-  return words[Math.floor(Math.random() * words.length)];
-}
 
-export function wheel() {
+export function turnWheel() {
   var guesValues= [10, 20, 30, 40, 50]
   return guesValues[Math.floor(Math.random() * guesValues.length)];
 }
 
-export function wrongGuessCount(word, guesses) {
-  var wrongs = guesses.filter(guess => word.indexOf(guess) === -1);
-  return wrongs.length;
-
-}
-
-export function showGuess(word, guesses) {
+export function showLetterBoard(word, guesses) {
   var splitWord = word.split('');
   var result = [];
 
@@ -40,9 +30,7 @@ export function next(word, guesses) {
   if (isWinner(word, guesses)) {
     return ('You have won!');
   }
-  if (wrongGuessCount(word, guesses) === 6) {
-    return ('You have lost!');
-  } else {
+  else {
     return ('Choose a letter please...')
   }
 }
