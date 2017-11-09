@@ -30,16 +30,12 @@ class Game extends PureComponent {
       updatedAt: PropTypes.string.isRequired,
       createdAt: PropTypes.string.isRequired,
       started: PropTypes.bool,
-    }),
-    wheel:PropTypes.shape({
       letterBoard: PropTypes.string.isRequired,
       word: PropTypes.string.isRequired,
       guesses: PropTypes.array,
       completed: PropTypes.bool,
-      wheelValue: PropTypes.number.isRequired,
-
+      wheelValue: PropTypes.number.isRequired
     }),
-
     currentPlayer: playerShape,
     isPlayer: PropTypes.bool,
     isJoinable: PropTypes.bool,
@@ -95,7 +91,7 @@ class Game extends PureComponent {
       <div>
       <GridList>
         <GridTile cols={2} rows={0.5}>
-            <h1> {this.props.wheel.letterBoard}</h1>
+            <h1> {game.letterBoard}</h1>
         </GridTile>
         <GridTile cols={1} rows={1.5}>
             <h1> Single guessed Letter </h1>
@@ -107,11 +103,11 @@ class Game extends PureComponent {
 
         <GridTile cols={1} rows={1}>
             <h2> {game.players[0].name}</h2>
-            <h3> {game.players[1].points}</h3>
+            <h3> {game.players[0].points}</h3>
         </GridTile>
         <GridTile cols={1} rows={1}>
-            <h2> {game.players[1].name}</h2>
-            <h3> {game.players[1].points}</h3>
+            <h2> {game.players[0].name}</h2>
+            <h3> {game.players[0].points}</h3>
         </GridTile>
 
         </GridList>
@@ -120,11 +116,10 @@ class Game extends PureComponent {
 
         <p>{title}</p>
 
-        <p> Word {this.props.wheel.word}</p>
+        <p> Word {game.word}</p>
 
-        <p> Guesses {this.props.wheel.guesses}</p>
-        <p> completed { this.props.wheel.completed.toString() }</p>
-        <p> Wheel value {this.props.wheel.wheelValue}</p>
+        <p> Guesses {game.guesses}</p>
+        <p> Wheel value {game.wheelValue}</p>
 
 
 
@@ -140,7 +135,7 @@ class Game extends PureComponent {
   }
 }
 
-const mapStateToProps = ({ currentUser, games, wheel }, { match }) => {
+const mapStateToProps = ({ currentUser, games }, { match }) => {
   const game = games.filter((g) => (g._id === match.params.gameId))[0]
   const currentPlayer = game && game.players.filter((p) => (p.userId === currentUser._id))[0]
   const hasTurn = !!currentPlayer && game.players[game.turn].userId === currentUser._id
@@ -150,7 +145,6 @@ const mapStateToProps = ({ currentUser, games, wheel }, { match }) => {
     isPlayer: !!currentPlayer,
     hasTurn,
     isJoinable: game && !currentPlayer && game.players.length < 2,
-    wheel
   }
 }
 
