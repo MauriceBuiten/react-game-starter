@@ -22,8 +22,9 @@
   font-size: large;
 }
 
-.Letterboard {
-  color: #FF0000;
+.picture {
+  width: 50%;
+  border-radius: 50%;
 }
 
 @keyframes App-logo-spin {

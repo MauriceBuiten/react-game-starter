@@ -6,7 +6,9 @@ import { connect as subscribeToWebsocket } from '../actions/websocket'
 import JoinGameDialog from '../components/games/JoinGameDialog'
 import './../App.css'
 import {GridList, GridTile} from 'material-ui/GridList';
+import wheel from '../images/wheel.png'
 import pressKey from '../actions/pressKey'
+
 
 const playerShape = PropTypes.shape({
   userId: PropTypes.string.isRequired,
@@ -90,25 +92,51 @@ class Game extends PureComponent {
       .join(' vs ')
 
     return (
+      <div>
       <GridList>
-        <h1>{title}</h1>
-
-        <h1> Word {this.props.wheel.word}</h1>
-        <GridTile>
-        <h1> Letterboard {this.props.wheel.letterBoard}</h1>
+        <GridTile cols cols={2} rows={0.5}>
+            <h1> {this.props.wheel.letterBoard}</h1>
         </GridTile>
-        <h1> Guesses {this.props.wheel.guesses}</h1>
-        <h1> completed { this.props.wheel.completed.toString() }</h1>
-        <h1> Wheel value {this.props.wheel.wheelValue}</h1>
+        <GridTile cols cols={1} rows={1.5}>
+            <h1> Single guessed Letter </h1>
+            <button> Spin the wheel </button>
+        </GridTile>
+        <GridTile cols cols={1} rows={1.5}>
+            <img className="picture" src={wheel}/>
+        </GridTile>
 
+        <GridTile cols cols={1} rows={1}>
+            <h2> {game.players[0].name}</h2>
+            <h3> {game.players[1].points}</h3>
+        </GridTile>
+        <GridTile cols cols={1} rows={1}>
+            <h2> {game.players[1].name}</h2>
+            <h3> {game.players[1].points}</h3>
+        </GridTile>
 
+        </GridList>
 
+//Onderstaande is alleen voor debuggin purposes
         <h2>Debug Props</h2>
+
+        <p>{title}</p>
+
+        <p> Word {this.props.wheel.word}</p>
+
+        <p> Guesses {this.props.wheel.guesses}</p>
+        <p> completed { this.props.wheel.completed.toString() }</p>
+        <p> Wheel value {this.props.wheel.wheelValue}</p>
+
+
+
+
+
         <pre>{JSON.stringify(this.props, true, 2)}</pre>
 
         <JoinGameDialog gameId={game._id} />
 
-      </GridList>
+        </div>
+
     )
   }
 }
