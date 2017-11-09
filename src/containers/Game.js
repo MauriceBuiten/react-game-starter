@@ -71,7 +71,7 @@ class Game extends PureComponent {
     subscribeToWebsocket()
   }
 
-  componentDidMount() { 
+  componentDidMount() {
      document.addEventListener('keypress', this.handleKeyPress);
   }
 
@@ -94,29 +94,28 @@ class Game extends PureComponent {
     return (
       <div>
       <GridList>
-        <GridTile cols cols={2} rows={0.5}>
+        <GridTile cols={2} rows={0.5}>
             <h1> {this.props.wheel.letterBoard}</h1>
         </GridTile>
-        <GridTile cols cols={1} rows={1.5}>
+        <GridTile cols={1} rows={1.5}>
             <h1> Single guessed Letter </h1>
             <button> Spin the wheel </button>
         </GridTile>
-        <GridTile cols cols={1} rows={1.5}>
-            <img className="picture" src={wheel}/>
+        <GridTile cols={1} rows={1.5}>
+            <img className="picture" src={wheel} alt =""/>
         </GridTile>
 
-        <GridTile cols cols={1} rows={1}>
+        <GridTile cols={1} rows={1}>
             <h2> {game.players[0].name}</h2>
             <h3> {game.players[1].points}</h3>
         </GridTile>
-        <GridTile cols cols={1} rows={1}>
+        <GridTile cols={1} rows={1}>
             <h2> {game.players[1].name}</h2>
             <h3> {game.players[1].points}</h3>
         </GridTile>
 
         </GridList>
 
-//Onderstaande is alleen voor debuggin purposes
         <h2>Debug Props</h2>
 
         <p>{title}</p>
