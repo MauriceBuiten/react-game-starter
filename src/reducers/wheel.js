@@ -1,20 +1,20 @@
-import {ADD_GUESS} from '../actions/addguess'
+import {PRESS_KEY} from '../actions/pressKey'
 
 function getWord(){
   var words = ["refrigerator", "telephone", "pillowcase", "doormat", "houseplant", "gaming", "curtains"]
   return words[Math.floor(Math.random() * words.length)];
 }
 
-function wrongGuessCount(word, guesses) {
-  var wrongs = guesses.filter(guess => word.indexOf(guess) === -1);
-  return wrongs.length;
-
-}
-
 function wheel() {
   var guesValues= [10, 20, 30, 40, 50]
   return guesValues[Math.floor(Math.random() * guesValues.length)];
 }
+
+// function wrongGuessCount(word, guesses) {
+//   var wrongs = guesses.filter(guess => word.indexOf(guess) === -1);
+//   return wrongs.length;
+//
+// }
 
 function showGuess(word, guesses) {
   var splitWord = word.split('');
@@ -30,13 +30,13 @@ function showGuess(word, guesses) {
   return joined;
 }
 
-function isWinner(word, guesses) {
-  var splitWord = word.split('');
-
-  let notGuessed = splitWord.filter(letter => guesses.indexOf(letter) === -1);
-  if (notGuessed.length > 0) return false
-  else return true
-}
+// function isWinner(word, guesses) {
+//   var splitWord = word.split('');
+//
+//   let notGuessed = splitWord.filter(letter => guesses.indexOf(letter) === -1);
+//   if (notGuessed.length > 0) return false
+//   else return true
+// }
 
 // function next(word, guesses) {
 //   if (isWinner(word, guesses)) {
@@ -49,25 +49,27 @@ function isWinner(word, guesses) {
 //   }
 // }
 
-var word = getWord();
-let guesses = []
+const initialWord = getWord()
 
 const initialState = {
-  letterBoard: showGuess(word, guesses),
-  word: word,
-  guesses: guesses,
+  word: initialWord,
+  letterBoard: showGuess(initialWord, []),
+  guesses: [],
   completed: false,
   wheelValue: wheel(),
-
 }
 
 export default (state = initialState, { type, payload } = {}) => {
 
   switch(type){
-    case ADD_GUESS:
-            return{
-
-
+    case PRESS_KEY:
+    state.guesses.push(payload)
+    state.letterBoard = showGuess(state.word, state.guesses)
+    
+            return {
+              ...state,
+              letterBoard: state.letterBoard,
+              guesses: state.guesses
             }
 
     default:

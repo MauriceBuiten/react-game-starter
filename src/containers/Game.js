@@ -7,6 +7,7 @@ import JoinGameDialog from '../components/games/JoinGameDialog'
 import './../App.css'
 import {GridList, GridTile} from 'material-ui/GridList';
 import wheel from '../images/wheel.png'
+import pressKey from '../actions/pressKey'
 
 
 const playerShape = PropTypes.shape({
@@ -45,12 +46,13 @@ class Game extends PureComponent {
     hasTurn: PropTypes.bool
   }
 
-  componentWillMount() {
-    const { game, fetchOneGame, subscribeToWebsocket } = this.props
-    const { gameId } = this.props.match.params
+  constructor() {
+    super();
+    this.handleKeyPress = this.handleKeyPress.bind(this);
+  }
 
-    if (!game) { fetchOneGame(gameId) }
-    subscribeToWebsocket()
+  handleKeyPress(event) {
+    this.props.pressKey(event.key);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -60,6 +62,25 @@ class Game extends PureComponent {
       this.props.fetchPlayers(game)
     }
   }
+
+  componentWillMount() {
+    const { game, fetchOneGame, subscribeToWebsocket } = this.props
+    const { gameId } = this.props.match.params
+
+    if (!game) { fetchOneGame(gameId) }
+    subscribeToWebsocket()
+  }
+
+  componentDidMount() { 
+     document.addEventListener('keypress', this.handleKeyPress);
+  }
+
+  componentWillUnmount() {
+     document.removeEventListener('keypress', this.handleKeyPress);
+  }
+
+
+
 
   render() {
     const { game } = this.props
@@ -113,13 +134,12 @@ class Game extends PureComponent {
         <pre>{JSON.stringify(this.props, true, 2)}</pre>
 
         <JoinGameDialog gameId={game._id} />
-        </div>
 
+        </div>
 
     )
   }
 }
-
 
 const mapStateToProps = ({ currentUser, games, wheel }, { match }) => {
   const game = games.filter((g) => (g._id === match.params.gameId))[0]
@@ -135,12 +155,9 @@ const mapStateToProps = ({ currentUser, games, wheel }, { match }) => {
   }
 }
 
-
-
-
-
 export default connect(mapStateToProps, {
   subscribeToWebsocket,
   fetchOneGame,
-  fetchPlayers
+  fetchPlayers,
+  pressKey
 })(Game)
