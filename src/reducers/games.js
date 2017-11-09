@@ -12,15 +12,17 @@ import { turnWheel, showLetterBoard, isWinner, next } from '../functions/wheel'
 export default (state = [], { type, payload } = {}) => {
   switch (type) {
     case PRESS_KEY:
-    console.log(state, payload)
 
     return state.map((game) => {
       if (game._id === payload._id) {
         return { ...payload }
       }
-      game.guesses.push(payload)
-      game.letterBoard = showLetterBoard(game.word, game.guesses)
-      return game
+      console.log("Reducer guesses", game.guesses, payload, type  )
+      return {...game,
+        guesses:[...game.guesses, payload],
+        letterBoard: showLetterBoard(game.word, game.guesses)
+      }
+
     })
 
     case FETCHED_GAMES:

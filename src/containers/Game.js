@@ -42,8 +42,8 @@ class Game extends PureComponent {
     hasTurn: PropTypes.bool
   }
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.handleKeyPress = this.handleKeyPress.bind(this);
   }
 
@@ -63,6 +63,8 @@ class Game extends PureComponent {
     const { game, fetchOneGame, subscribeToWebsocket } = this.props
     const { gameId } = this.props.match.params
 
+    console.log("test", game)
+
     if (!game) { fetchOneGame(gameId) }
     subscribeToWebsocket()
   }
@@ -74,8 +76,6 @@ class Game extends PureComponent {
   componentWillUnmount() {
      document.removeEventListener('keypress', this.handleKeyPress);
   }
-
-
 
 
   render() {
@@ -104,6 +104,7 @@ class Game extends PureComponent {
         <GridTile cols={1} rows={1}>
             <h2> {game.players[0].name}</h2>
             <h3> {game.players[0].points}</h3>
+
         </GridTile>
         <GridTile cols={1} rows={1}>
             <h2> {game.players[0].name}</h2>
@@ -114,19 +115,13 @@ class Game extends PureComponent {
 
         <h2>Debug Props</h2>
 
-        <p>{title}</p>
-
         <p> Word {game.word}</p>
+          <p> guesses {game.guesses}</p>
 
-        <p> Guesses {game.guesses}</p>
-        <p> Wheel value {game.wheelValue}</p>
-
-
-
+        <p>{title}</p>
 
 
         <pre>{JSON.stringify(this.props, true, 2)}</pre>
-
         <JoinGameDialog gameId={game._id} />
 
         </div>
