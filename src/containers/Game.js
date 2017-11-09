@@ -87,8 +87,6 @@ class Game extends PureComponent {
   render() {
     const { game } = this.props
 
-    console.log(game)
-
     if (!game) return null
 
     const title = game.players.map(p => (p.name || null))
@@ -158,6 +156,6 @@ export default connect(mapStateToProps, {
   subscribeToWebsocket,
   fetchOneGame,
   fetchPlayers,
-  pressKey,
+  // pressKey,
   updateGame,
 })(Game)

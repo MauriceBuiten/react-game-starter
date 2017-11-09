@@ -9,6 +9,7 @@ import {
 } from '../actions/games/subscribe'
 import { turnWheel, showLetterBoard, isWinner, next, rightGuessCount } from '../functions/wheel'
 
+
 export default (state = [], { type, payload } = {}) => {
   switch (type) {
     // case PRESS_KEY:
@@ -48,16 +49,16 @@ export default (state = [], { type, payload } = {}) => {
     case GAME_UPDATED:
       return state.map((game) => {
         if (game._id === payload._id) {
-          console.log("payload", payload)
-          console.log(payload.players[0].points)
-          console.log(payload.wheelValue)
-          var points = payload.players[0].points + payload.wheelValue
-          console.log(points)
+          // console.log("payload", payload)
+          // console.log(payload.players[0].points)
+          // console.log(payload.wheelValue)
+          // var points = payload.players[0].points + payload.wheelValue
+          // console.log(points)
+
 
           return {
             ...payload,
             letterBoard: showLetterBoard(payload.word, payload.guesses),
-
            }
         }
         return game
