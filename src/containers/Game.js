@@ -4,6 +4,8 @@ import { connect } from 'react-redux'
 import { fetchOneGame, fetchPlayers } from '../actions/games/fetch'
 import { connect as subscribeToWebsocket } from '../actions/websocket'
 import JoinGameDialog from '../components/games/JoinGameDialog'
+import './../App.css'
+import {GridList, GridTile} from 'material-ui/GridList';
 
 const playerShape = PropTypes.shape({
   userId: PropTypes.string.isRequired,
@@ -67,10 +69,13 @@ class Game extends PureComponent {
       .join(' vs ')
 
     return (
-      <div className="Game">
+      <GridList>
         <h1>{title}</h1>
+
         <h1> Word {this.props.wheel.word}</h1>
+        <GridTile>
         <h1> Letterboard {this.props.wheel.letterBoard}</h1>
+        </GridTile>
         <h1> Guesses {this.props.wheel.guesses}</h1>
         <h1> completed { this.props.wheel.completed.toString() }</h1>
         <h1> Wheel value {this.props.wheel.wheelValue}</h1>
@@ -81,7 +86,8 @@ class Game extends PureComponent {
         <pre>{JSON.stringify(this.props, true, 2)}</pre>
 
         <JoinGameDialog gameId={game._id} />
-      </div>
+      
+      </GridList>
     )
   }
 }
