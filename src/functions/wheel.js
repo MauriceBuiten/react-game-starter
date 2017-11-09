@@ -34,3 +34,14 @@ export function next(word, guesses) {
     return ('Choose a letter please...')
   }
 }
+
+export function rightGuessCount(word, letter) {
+    var splitWord = word.split('');
+    var amountOfRightLetters = 0
+
+    let guessedLetters = splitWord.filter(function(letterinword){
+      return letterinword === letter
+    })
+    amountOfRightLetters = guessedLetters.length
+    return amountOfRightLetters
+}

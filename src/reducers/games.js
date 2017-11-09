@@ -7,7 +7,7 @@ import {
   GAME_REMOVED,
   GAME_PLAYERS_UPDATED,
 } from '../actions/games/subscribe'
-import { turnWheel, showLetterBoard, isWinner, next } from '../functions/wheel'
+import { turnWheel, showLetterBoard, isWinner, next, rightGuessCount } from '../functions/wheel'
 
 export default (state = [], { type, payload } = {}) => {
   switch (type) {
@@ -48,19 +48,30 @@ export default (state = [], { type, payload } = {}) => {
     case GAME_UPDATED:
       return state.map((game) => {
         if (game._id === payload._id) {
-          // return { ...payload }
-           console.log(payload)
-          return {...payload, letterBoard: showLetterBoard(payload.word, payload.guesses) }
+          console.log("payload", payload)
+          console.log(payload.players[0].points)
+          console.log(payload.wheelValue)
+          var points = payload.players[0].points + payload.wheelValue
+          console.log(points)
+
+          return {
+            ...payload,
+            letterBoard: showLetterBoard(payload.word, payload.guesses),
+
+           }
         }
         return game
-
-
       })
 
     case GAME_PLAYERS_UPDATED:
       return state.map((game) => {
         if (game._id === payload.game._id) {
-          return { ...payload.game, players: payload.players }
+
+          return {
+            ...payload.game,
+            players: payload.players,
+
+           }
         }
         return game
       })

@@ -43,7 +43,6 @@ class Game extends PureComponent {
     hasTurn: PropTypes.bool
   }
 
-
  update(letter) {
     const { game } = this.props
     this.props.updateGame(game, letter)
@@ -55,7 +54,7 @@ class Game extends PureComponent {
   }
 
   handleKeyPress(event) {
-    this.props.pressKey(event.key)
+    // this.props.pressKey(event.key)
     this.update(event.key)
   }
 
@@ -88,6 +87,8 @@ class Game extends PureComponent {
   render() {
     const { game } = this.props
 
+    console.log(game)
+
     if (!game) return null
 
     const title = game.players.map(p => (p.name || null))
@@ -99,6 +100,7 @@ class Game extends PureComponent {
       <GridList>
         <GridTile cols={2} rows={0.5}>
             <h1> {game.letterBoard}</h1>
+
         </GridTile>
         <GridTile cols={1} rows={1.5}>
             <h1> Single guessed Letter </h1>
@@ -112,6 +114,7 @@ class Game extends PureComponent {
             <h2> {game.players[0].name}</h2>
             <h3> {game.players[0].points}</h3>
 
+
         </GridTile>
         <GridTile cols={1} rows={1}>
             <h2> the enemy </h2>
@@ -124,6 +127,7 @@ class Game extends PureComponent {
 
         <p> Word {game.word}</p>
           <p> guesses {game.guesses}</p>
+          <p> wheelvalue {game.wheelValue}</p>
 
         <p>{title}</p>
 
