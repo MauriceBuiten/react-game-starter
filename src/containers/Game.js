@@ -45,8 +45,8 @@ class Game extends PureComponent {
 
 
  update(letter) {
-   const {game} = this.props
-   this.props.updateGame(game, letter)
+    const { game } = this.props
+    this.props.updateGame(game, letter)
  }
 
   constructor(props) {
@@ -56,7 +56,8 @@ class Game extends PureComponent {
 
   handleKeyPress(event) {
     this.props.pressKey(event.key)
-    this.update(event.key);
+    this.update(event.key)
+
   }
 
   componentWillReceiveProps(nextProps) {

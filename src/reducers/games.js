@@ -21,7 +21,7 @@ export default (state = [], { type, payload } = {}) => {
       return {
         ...game,
         guesses:[...game.guesses, payload],
-        letterBoard: showLetterBoard(game.word, [...game.guesses, payload])
+        letterBoard: showLetterBoard(game.word, [...game.guesses, payload]),
       }
 
     })
@@ -51,6 +51,8 @@ export default (state = [], { type, payload } = {}) => {
           return { ...payload }
         }
         return game
+
+
       })
 
     case GAME_PLAYERS_UPDATED:
