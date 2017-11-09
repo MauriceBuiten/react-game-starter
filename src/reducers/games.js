@@ -17,10 +17,11 @@ export default (state = [], { type, payload } = {}) => {
       if (game._id === payload._id) {
         return { ...payload }
       }
-      console.log("Reducer guesses", game.guesses, payload, type  )
-      return {...game,
+
+      return {
+        ...game,
         guesses:[...game.guesses, payload],
-        letterBoard: showLetterBoard(game.word, game.guesses)
+        letterBoard: showLetterBoard(game.word, [...game.guesses, payload])
       }
 
     })
