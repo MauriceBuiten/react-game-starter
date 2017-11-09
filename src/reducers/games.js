@@ -7,6 +7,7 @@ import {
   GAME_PLAYERS_UPDATED,
 } from '../actions/games/subscribe'
 
+
 export default (state = [], { type, payload } = {}) => {
   switch (type) {
     case FETCHED_GAMES :
