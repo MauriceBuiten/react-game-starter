@@ -9,27 +9,20 @@ import {
 } from '../actions/games/subscribe'
 import { getWord, wheel, wrongGuessCount, showGuess, isWinner, next } from '../functions/wheel'
 
-// const initialWord = getWord()
-
-// const initialState = {
-//   word: initialWord,
-//   letterBoard: showGuess(initialWord, []),
-//   guesses: [],
-//   completed: false,
-//   wheelValue: wheel()
-// }
+const initialWord = getWord()
 
 export default (state = [], { type, payload } = {}) => {
   switch (type) {
-    // case PRESS_KEY:
-    //   state.guesses.push(payload)
-    //   state.letterBoard = showGuess(state.word, state.guesses)
-    //
-    //   return {
-    //     ...state,
-    //     letterBoard: state.letterBoard,
-    //     guesses: state.guesses
-    //   }
+    case PRESS_KEY:
+    console.log(state, payload)
+
+    return state.map((game) => {
+      if (game._id === payload._id) {
+        return { ...payload }
+      }
+      game.guesses.push(payload)
+      return game
+    })
 
     case FETCHED_GAMES:
       return [...payload]
