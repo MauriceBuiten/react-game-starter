@@ -2,14 +2,12 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { fetchOneGame, fetchPlayers } from '../actions/games/fetch'
-import {updateGame} from '../actions/game/update'
 import { connect as subscribeToWebsocket } from '../actions/websocket'
 import JoinGameDialog from '../components/games/JoinGameDialog'
 import './../App.css'
 import {GridList, GridTile} from 'material-ui/GridList';
 import wheel from '../images/wheel.png'
-import pressKey from '../actions/pressKey'
-
+import pressKey from '../actions/games/pressKey'
 
 const playerShape = PropTypes.shape({
   userId: PropTypes.string.isRequired,
@@ -43,20 +41,14 @@ class Game extends PureComponent {
     hasTurn: PropTypes.bool
   }
 
-
- update(letter) {
-   const {game} = this.props
-   this.props.updateGame(game, letter)
- }
-
   constructor(props) {
     super(props);
     this.handleKeyPress = this.handleKeyPress.bind(this);
   }
 
   handleKeyPress(event) {
-    this.props.pressKey(event.key)
-    this.update(event.key);
+    const { game } = this.props
+    this.props.pressKey(game, event.key)
   }
 
   componentWillReceiveProps(nextProps) {
@@ -70,8 +62,6 @@ class Game extends PureComponent {
   componentWillMount() {
     const { game, fetchOneGame, subscribeToWebsocket } = this.props
     const { gameId } = this.props.match.params
-
-    console.log("test", game)
 
     if (!game) { fetchOneGame(gameId) }
     subscribeToWebsocket()
@@ -95,7 +85,7 @@ class Game extends PureComponent {
       .filter(n => !!n)
       .join(' vs ')
 
-    function player() {
+    function playerTwo() {
       if (game.players.length === 2) {
         return (
           <div>
@@ -105,6 +95,7 @@ class Game extends PureComponent {
         )
       }
     }
+
     return (
       <div>
       <GridList>
@@ -124,7 +115,7 @@ class Game extends PureComponent {
             <h3> {game.players[0].points}</h3>
         </GridTile>
         <GridTile cols={1} rows={1}>
-            { player() }
+            { playerTwo() }
         </GridTile>
 
 
@@ -165,6 +156,5 @@ export default connect(mapStateToProps, {
   subscribeToWebsocket,
   fetchOneGame,
   fetchPlayers,
-  pressKey,
-  updateGame,
+  pressKey
 })(Game)
