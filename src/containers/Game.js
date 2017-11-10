@@ -78,7 +78,7 @@ class Game extends PureComponent {
 
   render() {
     const { game } = this.props
-
+    const props = this.props
     if (!game) return null
 
     const title = game.players.map(p => (p.name || null))
@@ -89,11 +89,23 @@ class Game extends PureComponent {
       if (game.players.length === 2) {
         return (
           <div>
-          <h2> {game.players[1].name}</h2>
-          <h3> {game.players[1].points}</h3>
+            <h2> {game.players[1].name}</h2>
+            <h3> {game.players[1].points}</h3>
           </div>
         )
       }
+    }
+
+    function showTurn() {
+      console.log(props.hasTurn)
+       if (props.hasTurn === true) {
+        return (
+          <div>
+            <h1> Its your turn </h1>
+            <button> Spin the wheel </button>
+          </div>
+       )
+     }
     }
 
     return (
@@ -102,9 +114,8 @@ class Game extends PureComponent {
         <GridTile cols={2} rows={0.5}>
             <h1> {game.letterBoard}</h1>
         </GridTile>
-        <GridTile cols={1} rows={1.5}>
-            <h1> Single guessed Letter </h1>
-            <button> Spin the wheel </button>
+        <GridTile cols={1} rows={1}>
+            { showTurn() }
         </GridTile>
         <GridTile cols={1} rows={1.5}>
             <img className="picture" src={wheel} alt =""/>
@@ -126,8 +137,6 @@ class Game extends PureComponent {
 
         <p> Word {game.word}</p>
           <p> guesses {game.guesses}</p>
-
-          <p> turn {game.turn}</p>
 
         <p>{title}</p>
 
