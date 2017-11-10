@@ -137,19 +137,7 @@ class Game extends PureComponent {
 
         </GridList>
 
-        <h2>Debug Props</h2>
-
-        <p> Word {game.word}</p>
-          <p> guesses {game.guesses}</p>
-
-        <p>{title}</p>
-
-
-        <pre>{JSON.stringify(this.props, true, 2)}</pre>
-        <JoinGameDialog gameId={game._id} />
-
-        </div>
-
+    
     )
   }
 }
