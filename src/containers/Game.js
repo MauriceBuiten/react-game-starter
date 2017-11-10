@@ -24,6 +24,8 @@ class Game extends PureComponent {
       _id: PropTypes.string.isRequired,
       userId: PropTypes.string.isRequired,
       players: PropTypes.arrayOf(playerShape),
+      player_one_points: PropTypes.number,
+      player_two_points: PropTypes.numer,
       turn: PropTypes.number.isRequired,
       draw: PropTypes.bool,
       updatedAt: PropTypes.string.isRequired,
@@ -91,6 +93,7 @@ class Game extends PureComponent {
           <div>
           <h2> {game.players[1].name}</h2>
           <h3> {game.players[1].points}</h3>
+          <h3> {game.player_two_points}</h3>
           </div>
         )
       }
@@ -113,6 +116,8 @@ class Game extends PureComponent {
         <GridTile cols={1} rows={1}>
             <h2> {game.players[0].name}</h2>
             <h3> {game.players[0].points}</h3>
+            <h3> {game.player_one_points}</h3>
+
         </GridTile>
         <GridTile cols={1} rows={1}>
             { playerTwo() }
