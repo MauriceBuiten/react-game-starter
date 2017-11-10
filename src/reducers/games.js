@@ -49,25 +49,33 @@ export default (state = [], { type, payload } = {}) => {
     case GAME_UPDATED:
       return state.map((game) => {
         if (game._id === payload._id) {
-          // console.log("payload", payload)
-          // console.log(payload.players[0].points)
-          // console.log(payload.wheelValue)
-          // var points = payload.players[0].points + payload.wheelValue
-          // console.log(points)
+           console.log("payload", payload)
+           console.log("points player 1: ", payload.players[0].points)
+           console.log("value of the wheel", payload.wheelValue)
+           var points = payload.players[0].points + payload.wheelValue
+           console.log("new points player 1", points)
+           console.log("new points player 1", payload.currentPlayer)
 
 
           return {
             ...payload,
-            letterBoard: showLetterBoard(payload.word, payload.guesses),
-           }
+            letterBoard: showLetterBoard(payload.word, payload.guesses)
+            //  players: [{
+            //   points: payload.wheelValue,
+            //   },
+            //   {
+            //   points: 0 ,
+            //   }
+            // ]
         }
         return game
-      })
+      }
+    })
 
     case GAME_PLAYERS_UPDATED:
       return state.map((game) => {
         if (game._id === payload.game._id) {
-
+          console.log("game updated", payload)
           return {
             ...payload.game,
             players: payload.players,
