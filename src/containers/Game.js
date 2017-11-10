@@ -127,6 +127,8 @@ class Game extends PureComponent {
         <p> Word {game.word}</p>
           <p> guesses {game.guesses}</p>
 
+          <p> turn {game.turn}</p>
+
         <p>{title}</p>
 
 
