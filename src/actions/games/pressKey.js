@@ -8,15 +8,11 @@ import {
 
 const api = new API()
 
-export const UPDATE_GAME = 'UPDATE_GAME'
-
-export const updateGame = (game, letter) => {
+export default (game, key) => {
   return (dispatch) => {
     dispatch({ type: APP_LOADING })
-//stuur wat je mee wilt nemen als update als {} in de patch
 
-      api.patch(`/games/${game._id}`, {letter})
-  
+    api.patch(`/games/${game._id}`, { key })
       .then(() => {
         dispatch({ type: APP_DONE_LOADING })
         dispatch({ type: LOAD_SUCCESS })

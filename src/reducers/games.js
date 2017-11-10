@@ -1,6 +1,5 @@
 // src/reducers/games.js
 import { FETCHED_GAMES, FETCHED_ONE_GAME } from '../actions/games/fetch'
-import { PRESS_KEY } from '../actions/pressKey'
 import {
   GAME_CREATED,
   GAME_UPDATED,
@@ -11,20 +10,6 @@ import { turnWheel, showLetterBoard, isWinner, next } from '../functions/wheel'
 
 export default (state = [], { type, payload } = {}) => {
   switch (type) {
-    case PRESS_KEY:
-
-    return state.map((game) => {
-      if (game._id === payload._id) {
-        return { ...payload }
-      }
-
-      return {
-        ...game,
-        guesses:[...game.guesses, payload],
-        letterBoard: showLetterBoard(game.word, [...game.guesses, payload])
-      }
-
-    })
 
     case FETCHED_GAMES:
       return [...payload]
