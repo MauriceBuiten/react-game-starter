@@ -7,10 +7,12 @@ export default class ApiClient {
     tokenStorageKey: 'gameApiJWT'
   }
 
+
   constructor(host, options = {}) {
     this.host = process.env.NODE_ENV === 'production'
       ? 'https://wheel-of-fortune-api.codaisseur.cloud' // WITHOUT the / !!!
       : (host || 'http://localhost:3030')
+      this.options = { ...this.defaultOptions, ...options }
   }
 
   // Authenticate and store the token
